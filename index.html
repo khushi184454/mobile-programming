@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clothing Brands</title>
+    <style>
+        body {
+            background-color: lavender;
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+        .brand {
+            padding: 15px;
+            border-radius: 10px;
+            width: 45%;
+        }
+        .product {
+            margin-top: 10px;
+            border-radius: 10px;
+            padding: 50px;
+            color: white;
+        }
+        img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            margin-top: 10px;
+        }
+        .hidden {
+            display: none;
+            margin-top: 10px;
+            font-weight: bold;
+            color: darkblue;
+        }
+        button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: navy;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- NIKE -->
+        <div id="group1" class="brand" style="background-color: #ff9999; border: 5px solid #ff0000;">
+            <h2>NIKE</h2>
+            <div class="product" style="background-color:#111;">Air Max Shoes</div>
+            <div class="product" style="background-color:#ffffff; color:black;">Nike Sportswear</div>
+            <p class="hidden msg1">Nike inspires athletes around the world!</p>
+            <button onclick="changeDivColor('group1')">Change My Color</button>
+        </div>
+
+        <!-- ADIDAS -->
+        <div id="group2" class="brand" style="background-color: #99ccff; border: 5px double #0000ff;">
+            <h2>ADIDAS</h2>
+            <div class="product" style="background-color:#000000;">Ultraboost</div>
+            <div class="product" style="background-color:#1da1f2;">Adidas Originals</div>
+            <p id="msg2" class="hidden">Adidas stands for performance and innovation.</p>
+            <button onclick="showMessage('msg2')">Show Message</button>
+        </div>
+
+        <!-- GUCCI -->
+        <div id="group3" class="brand" style="background-color: #99ff99; border: 4px solid green;">
+            <h2>GUCCI</h2>
+            <div class="product" style="background-color:#8b0000;">Leather Handbag</div>
+            <div class="product" style="background-color:#ffd700; color:black;">Gucci Belt</div>
+            <p id="msg3">Luxury redefined with style and elegance!</p>
+            <button id="toggleBtn3" onclick="toggleMessage('msg3', 'toggleBtn3')">Hide Message</button>
+        </div>
+
+        <!-- ZARA -->
+        <div id="group4" class="brand" style="background-color: #ffcc99; border: 5px solid orange;">
+            <h2>ZARA</h2>
+            <div class="product" style="background-color:#000000;">Zara Dress</div>
+            <div class="product" style="background-color:#696969;">Zara Coat</div>
+            <p id="msg4" class="hidden">Modern fashion made affordable and trendy.</p>
+            <img id="img4" src="C:\\Users\\nepal\\OneDrive\\Desktop\\New folder (2)\\zara1.jpg" alt="Zara Product">
+            <button onclick="changeImage('img4')">Change Image</button>
+        </div>
+
+    </div>
+
+    <!-- Button for whole page background -->
+    <div style="text-align:center; margin-top:30px;">
+        <button onclick="changeBackground()">Change Page Background</button>
+    </div>
+
+    <script>
+        let toggleImage = false;
+
+        function changeDivColor(id) {
+            const colors = ['#FFD700', '#FF69B4', '#00FA9A', '#1E90FF', '#FF4500'];
+            const random = colors[Math.floor(Math.random() * colors.length)];
+            document.getElementById(id).style.backgroundColor = random;
+        }
+
+        function showMessage(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function toggleMessage(id, btnId) {
+            const msg = document.getElementById(id);
+            const btn = document.getElementById(btnId);
+            if (msg.classList.contains('hidden')) {
+                msg.classList.remove('hidden');
+                btn.textContent = "Hide Message";
+            } else {
+                msg.classList.add('hidden');
+                btn.textContent = "Show Message";
+            }
+        }
+
+        function changeImage(id) {
+            const img = document.getElementById(id);
+            if (toggleImage) {
+                img.src = "C:\\Users\\nepal\\OneDrive\\Desktop\\New folder (2)\\zara1.jpg";
+            } else {
+                img.src = "C:\\Users\\nepal\\OneDrive\\Desktop\\New folder (2)\\zara2.jpg";
+            }
+            toggleImage = !toggleImage;
+        }
+
+        function changeBackground() {
+            const colors = ['#fffacd', '#d1f7ff', '#f0fff0', '#f5f5dc', '#ffefd5'];
+            document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+
+</body>
+</html>
