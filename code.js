@@ -5,11 +5,11 @@ function toggleContainer1() {
 }
 
 function showSum() {
-  let roshan = 5;
-  let marasini = 6;
-  const sum = roshan + marasini;
+  let khushi = 5;
+  let gurung = 6;
+  const sum = khushi + gurung;
   const result = document.getElementById("sumResult");
-  result.textContent = `The sum of ${roshan} + ${marasini} is ${sum}.`;
+  result.textContent = `The sum of ${khushi} + ${gurung} is ${sum}.`;
 }
 $(document).ready(function() {
   let addVisible = false;
