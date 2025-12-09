@@ -15,21 +15,33 @@ import {
 
 export default function HomeScreen() {
   const [menuVisible, setMenuVisible] = useState(false);
+
+  // FORM STATES
   const [expenseName, setExpenseName] = useState("");
+  const [amount, setAmount] = useState("");
+  const [category, setCategory] = useState("");
+  const [date, setDate] = useState("");
 
   const handleAdd = () => {
-    if (!expenseName.trim()) {
-      Alert.alert("Empty Field", "Please enter an expense name!");
+    if (!expenseName.trim() || !amount.trim() || !category.trim() || !date.trim()) {
+      Alert.alert("Missing Fields", "Please fill all fields!");
       return;
     }
-    Alert.alert("Added!", `${expenseName} added successfully!`);
+    Alert.alert(
+      "Success!",
+      `Expense Added:\n\nName: ${expenseName}\nAmount: ${amount}\nCategory: ${category}\nDate: ${date}`
+    );
+
+    // Clear form
     setExpenseName("");
+    setAmount("");
+    setCategory("");
+    setDate("");
   };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-
         {/* NAVBAR */}
         <View style={styles.navbar}>
           <Image
@@ -68,16 +80,41 @@ export default function HomeScreen() {
           <Text style={styles.title}>Splitify – Expense Splitter</Text>
           <Text style={styles.subtitle}>Plan & split expenses easily</Text>
 
-          {/* TEXT INPUT */}
-          <View style={styles.inputBox}>
+          {/* EXPENSE FORM */}
+          <View style={styles.formCard}>
+            <Text style={styles.formTitle}>Add Expense</Text>
+
             <TextInput
               style={styles.input}
-              placeholder="Enter expense name"
+              placeholder="Expense Name"
               value={expenseName}
               onChangeText={setExpenseName}
             />
+
+            <TextInput
+              style={styles.input}
+              placeholder="Amount"
+              keyboardType="numeric"
+              value={amount}
+              onChangeText={setAmount}
+            />
+
+            <TextInput
+              style={styles.input}
+              placeholder="Category (e.g., Food, Travel)"
+              value={category}
+              onChangeText={setCategory}
+            />
+
+            <TextInput
+              style={styles.input}
+              placeholder="Date (YYYY-MM-DD)"
+              value={date}
+              onChangeText={setDate}
+            />
+
             <TouchableOpacity style={styles.addBtn} onPress={handleAdd}>
-              <Text style={styles.addText}>Add</Text>
+              <Text style={styles.addText}>Submit</Text>
             </TouchableOpacity>
           </View>
 
@@ -159,29 +196,39 @@ const styles = StyleSheet.create({
     color: "#777",
   },
 
-  /* INPUT */
-  inputBox: {
-    flexDirection: "row",
-    paddingHorizontal: 20,
+  /* FORM CARD */
+  formCard: {
+    backgroundColor: "#FFF",
+    marginHorizontal: 20,
+    padding: 20,
+    borderRadius: 15,
+    elevation: 5,
     marginBottom: 20,
   },
+  formTitle: {
+    fontSize: 20,
+    fontWeight: "700",
+    marginBottom: 15,
+  },
+
+  /* INPUT */
   input: {
-    flex: 1,
     backgroundColor: "#FFF",
     padding: 12,
     borderRadius: 10,
     elevation: 3,
+    marginBottom: 12,
   },
+
   addBtn: {
-    paddingHorizontal: 15,
     paddingVertical: 12,
     backgroundColor: "#4CAF50",
     borderRadius: 10,
-    marginLeft: 10,
+    marginTop: 5,
   },
-  addText: { color: "#FFF", fontWeight: "700" },
+  addText: { textAlign: "center", color: "#FFF", fontWeight: "700" },
 
-  /* CARDS */
+  /* CATEGORY CARDS */
   cardContainer: { paddingHorizontal: 20 },
   card: {
     backgroundColor: "#FFF",
@@ -193,3 +240,4 @@ const styles = StyleSheet.create({
   cardTitle: { fontSize: 18, fontWeight: "700", marginBottom: 5 },
   cardSub: { fontSize: 14, color: "#777" },
 });
+
